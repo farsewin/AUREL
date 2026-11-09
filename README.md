@@ -89,6 +89,22 @@ Layouts are built for mobile, tablet and desktop, with touch-friendly controls, 
 | `project-kiln.webp` | `photo-1512972972907-6d71529c5e92` |
 | `studio-atelier.webp` | `photo-1758800601052-37b407129be1` |
 
+## Deployment
+
+The site is published to **GitHub Pages** at <https://farsewin.github.io/AUREL/>.
+
+Every push to `main` triggers `.github/workflows/deploy.yml`, which installs dependencies, lints, builds and deploys `dist/` through the official Pages actions.
+
+Because Pages serves the site from a `/AUREL/` sub-path, `vite.config.ts` sets `base: '/AUREL/'`. Files in `public/` must be referenced through the `asset()` helper in `src/lib/utils.ts` so their URLs pick up the base path:
+
+```ts
+import { asset } from '../lib/utils'
+
+<img src={asset('/images/hero-casa.webp')} />
+```
+
+Set `VITE_BASE=/` to build for a custom domain or root deployment.
+
 ## Notes
 
 The contact details, email address and social profiles are placeholders for the fictional studio. Replace them alongside the form endpoint, canonical URL and social metadata before publishing.
